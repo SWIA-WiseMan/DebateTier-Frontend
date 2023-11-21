@@ -11,6 +11,12 @@
 		"format": "prettier --check --ignore-path .gitignore .",
 		"format:fix": "prettier --write --ignore-path .gitignore ."
 	},
+	"paths": {
+		"@assets/*": ["app/assets/*"],
+		"@components/*": ["app/components/*"],
+		"@screens/*": ["app/screens/*"],
+		"@utils/*": ["app/utils/*"]
+	},
 	"dependencies": {
 		"react": "18.2.0",
 		"react-native": "0.72.7"
