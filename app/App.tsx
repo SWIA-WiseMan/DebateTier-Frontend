@@ -20,9 +20,10 @@ import {
 import {
 	Colors,
 	DebugInstructions,
-	Header,
 	LearnMoreLinks,
 } from "react-native/Libraries/NewAppScreen";
+
+import Header from "./components/common/Header.tsx";
 
 import TestComponent from "../src/components/test.tsx";
 
@@ -65,6 +66,8 @@ function App(): JSX.Element {
 		backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
 	};
 
+	const handleSharePress = () => {};
+
 	return (
 		<SafeAreaView style={backgroundStyle}>
 			<StatusBar
@@ -75,7 +78,7 @@ function App(): JSX.Element {
 				contentInsetAdjustmentBehavior="automatic"
 				style={backgroundStyle}
 			>
-				<Header />
+				<Header showShareButton={true} onSharePress={handleSharePress} />
 
 				<View
 					style={{
@@ -83,8 +86,8 @@ function App(): JSX.Element {
 					}}
 				>
 					<Section title="Step One">
-						 <Text style={styles.highlight}>App.tsx</Text> to change this
-						screen and then come back to see your edits.
+						<Text style={styles.highlight}>App.tsx</Text> to change this screen
+						and then come back to see your edits.
 					</Section>
 
 					<Section title="See Your Changes">
