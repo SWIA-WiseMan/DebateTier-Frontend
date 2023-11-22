@@ -7,7 +7,7 @@ function Login() {
       <Text style={styles.title}>토론티어</Text>
       <Image
         style={styles.image}
-        source={require("../assets/kakao_login_medium_wide.png")}
+        source={require("../../assets/images/kakao_login_medium_wide.png")}
       />
     </View>
   );
