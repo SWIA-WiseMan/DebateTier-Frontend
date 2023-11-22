@@ -1,0 +1,7 @@
+{
+	"[javascriptreact]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"vs-code-prettier-eslint.prettierLast": true
+}
