@@ -3,13 +3,18 @@ module.exports = {
 		browser: true,
 		es6: true,
 		node: true,
+		jest: true,
 	},
 	extends: [
 		"eslint:recommended",
 		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
 		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"airbnb",
 		"plugin:prettier/recommended",
+		"prettier",
 	],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
