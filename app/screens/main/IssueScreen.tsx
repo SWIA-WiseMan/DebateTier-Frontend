@@ -1,10 +1,11 @@
 import React from "react";
-import { SafeAreaView, View, Text } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "app/App";
 
 import Header from "@components/common/Header";
 import Footer from "@components/common/Footer";
+import Frame from "@components/issue/Frame";
 
 type IssueScreenProps = {
 	navigation: StackNavigationProp<RootStackParamList, "Issue">;
@@ -17,7 +18,7 @@ const IssueScreen: React.FC<IssueScreenProps> = ({ navigation }) => {
 		<SafeAreaView style={{ flex: 1 }}>
 			<Header showShareButton={false} onSharePress={handleSharePress} />
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<Text>Issue Screen</Text>
+				<Frame />
 			</View>
 			<Footer activeTab="Issue" navigation={navigation} />
 		</SafeAreaView>
