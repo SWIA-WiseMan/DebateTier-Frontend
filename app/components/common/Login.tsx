@@ -1,14 +1,13 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
+import LoginImg from "@assets/images/kakao_login_3second.svg";
+
 function Login() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>토론티어</Text>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/kakao_login_3second.svg")}
-      />
+      <LoginImg style={styles.image} />
     </View>
   );
 }
