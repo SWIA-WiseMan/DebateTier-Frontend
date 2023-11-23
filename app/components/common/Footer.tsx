@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import HomeButton from "@assets/images/Icon_Home.svg";
 import IssueButton from "@assets/images/Icon_Issue.svg";
@@ -7,10 +8,15 @@ import MypageButton from "@assets/images/Icon_Mypage.svg";
 
 interface FooterProps {
 	activeTab: "Home" | "Issue" | "Mypage";
+	navigation: any;
 }
 
-const Footer: React.FC<FooterProps> = ({ activeTab }) => {
-	const handlePress = (screenName: "Home" | "Issue" | "Mypage") => {};
+const Footer: React.FC<FooterProps> = ({ activeTab, navigation }) => {
+	const handlePress = (screenName: "Home" | "Issue" | "Mypage") => {
+		if (navigation) {
+			navigation.navigate(screenName);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
