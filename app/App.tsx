@@ -21,6 +21,11 @@ const App: React.FC = () => {
 					tabBarActiveTintColor: "#FFB800",
 					tabBarInactiveTintColor: "#BDBDBD",
 					headerShown: false,
+					tabBarStyle: {
+						height: 70,
+						paddingBottom: 15,
+						paddingTop: 10,
+					},
 				}}
 			>
 				<Tab.Screen
