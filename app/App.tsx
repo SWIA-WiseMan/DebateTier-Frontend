@@ -24,6 +24,7 @@ import {
 } from "react-native/Libraries/NewAppScreen";
 
 import Header from "./components/common/Header.tsx";
+import IssueList from "./components/IssueList.tsx";
 
 import TestComponent from "../src/components/test.tsx";
 
@@ -79,6 +80,7 @@ function App(): JSX.Element {
 				style={backgroundStyle}
 			>
 				<Header showShareButton={true} onSharePress={handleSharePress} />
+				<IssueList />
 
 				<View
 					style={{
