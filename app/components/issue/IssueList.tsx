@@ -91,8 +91,9 @@ const styles = StyleSheet.create({
 		borderBottomColor: "#CCCCCC",
 	},
 	title: {
-		fontSize: 24,
-		fontWeight: "bold",
+		fontSize: 22,
+		fontFamily: "Roboto",
+		fontWeight: "800",
 		marginBottom: 8,
 	},
 	detailsContainer: {
@@ -102,6 +103,9 @@ const styles = StyleSheet.create({
 		marginLeft: 3,
 	},
 	textWithMargin: {
+		fontSize: 10,
+		fontFamily: "Roboto",
+		fontWeight: "400",
 		marginRight: 7,
 	},
 	textLine: {
@@ -111,6 +115,11 @@ const styles = StyleSheet.create({
 	},
 	iconContainer: {
 		marginLeft: "auto",
+	},
+	textContent: {
+		fontSize: 14,
+		fontFamily: "Roboto",
+		fontWeight: "500",
 	},
 });
 

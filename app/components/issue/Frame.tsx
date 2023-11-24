@@ -52,24 +52,30 @@ const Frame: React.FC = () => {
 
 const styles = StyleSheet.create({
 	textContainer: {
-		flex: 1,
 		backgroundColor: "#FFFFFF",
 		flexDirection: "row",
 		justifyContent: "space-between",
-		paddingHorizontal: 20,
+		paddingHorizontal: 30,
 		paddingVertical: 10,
 	},
 	textItem: {
-		fontSize: 22,
-		padding: 25,
+		fontSize: 16,
+		fontFamily: "Roboto",
+		fontWeight: "600",
+		padding: 35,
 		paddingTop: 0,
+		paddingBottom: 15,
 		borderBottomWidth: 1,
 		borderBottomColor: "#D9D9D9",
+		flexShrink: 0,
 	},
 	colorText: {
-		fontSize: 22,
+		fontSize: 16,
+		fontFamily: "Roboto",
+		fontWeight: "600",
 		color: "#FFB800",
 		borderBottomColor: "#FFB800",
+		flexShrink: 0,
 	},
 });
 
