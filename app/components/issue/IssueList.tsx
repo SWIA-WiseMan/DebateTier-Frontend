@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	ScrollView,
-	TouchableOpacity,
-} from "react-native";
-import Icon_Good from "@assets/images/Icon_Good.svg";
-import Icon_Comment from "@assets/images/Icon_Comment.svg";
-import Icon_Hot from "@assets/images/Icon_Hot.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { ScrollView, StyleSheet } from "react-native";
+import IssueItem from "@components/issue/IssueItem";
 
 interface IssueData {
 	title: string;
@@ -21,96 +11,68 @@ interface IssueData {
 }
 
 const IssueList: React.FC = () => {
-	const [issueData, setIssueData] = useState<IssueData | null>(null);
+	const [issueDataList, setIssueDataList] = useState<IssueData[]>([]);
+	const [heartState, setHeartState] = useState<boolean>(false);
 
 	useEffect(() => {
-		// 백엔드 데이터 예시
-		const responseData: IssueData = {
-			title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
-			likeCount: 100,
-			commentCount: 50,
-			createdTime: "1시간 전",
-			content:
-				"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
-		};
+		// 백엔드에서 데이터를 받아와서 issueDataList 상태에 설정
+		// 예시로 더미 데이터 사용
+		const responseData: IssueData[] = [
+			{
+				title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
+				likeCount: 100,
+				commentCount: 50,
+				createdTime: "1시간 전",
+				content:
+					"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
+			},
+			{
+				title: "빠른년생 폐지에 대해 어떻게 생각하시나요?",
+				likeCount: 30,
+				commentCount: 20,
+				createdTime: "1시간 전",
+				content:
+					"다들 빠른년생 폐지에 대해 어떻게 생각하시나요..? 전 솔직히 폐지해야 한다고 생각합니다..",
+			},
+		];
 
-		setIssueData(responseData);
+		setIssueDataList(responseData);
 	}, []);
 
-	const [isHeartFilled, setIsHeartFilled] = useState(false);
+	const handleLikeToggle = (index: number) => {
+		const updatedIssueDataList = issueDataList.map((issueData, i) => {
+			if (i === index) {
+				return {
+					...issueData,
+					likeCount: heartState
+						? issueData.likeCount - 1
+						: issueData.likeCount + 1,
+				};
+			}
+			return issueData;
+		});
 
-	const toggleHeart = () => {
-		setIsHeartFilled((prev) => !prev);
+		setHeartState(!heartState);
+		setIssueDataList(updatedIssueDataList);
 	};
 
 	return (
 		<ScrollView style={styles.container}>
-			{issueData && (
-				<>
-					<Icon_Hot />
-
-					<Text style={styles.title}>{issueData.title}</Text>
-
-					<View style={styles.detailsContainer}>
-						<Icon_Good style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							좋아요 {issueData.likeCount}개
-						</Text>
-						<Text style={styles.textLine}></Text>
-						<Icon_Comment style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							댓글 {issueData.commentCount}개
-						</Text>
-						<Text style={styles.textLine}></Text>
-						<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-						<View style={styles.iconContainer}>
-							<TouchableOpacity onPress={toggleHeart}>
-								<FontAwesomeIcon
-									icon={faHeart}
-									size={20}
-									color={isHeartFilled ? "#80808064" : "#FFB800"}
-								/>
-							</TouchableOpacity>
-						</View>
-					</View>
-
-					<Text numberOfLines={2}>{issueData.content}</Text>
-				</>
-			)}
+			{issueDataList.map((issueData, index) => (
+				<IssueItem
+					key={index}
+					issueData={issueData}
+					onLikeToggle={() => handleLikeToggle(index)}
+					heartState={heartState}
+				/>
+			))}
 		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		padding: 20,
-		paddingBottom: 10,
-		borderBottomWidth: 1,
 		backgroundColor: "#FFFFFF",
-		borderBottomColor: "#CCCCCC",
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: "bold",
-		marginBottom: 8,
-	},
-	detailsContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginBottom: 5,
-		marginLeft: 3,
-	},
-	textWithMargin: {
-		marginRight: 7,
-	},
-	textLine: {
-		marginRight: 7,
-		borderRightWidth: 1,
-		borderRightColor: "#E6E6E6",
-	},
-	iconContainer: {
-		marginLeft: "auto",
 	},
 });
 
