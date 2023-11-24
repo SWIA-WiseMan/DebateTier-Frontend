@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import IssueItem from "@components/issue/IssueItem";
+import { useNavigation } from "@react-navigation/native";
 
 interface IssueData {
 	title: string;
@@ -11,6 +12,7 @@ interface IssueData {
 }
 
 const IssueList: React.FC = () => {
+	const navigation = useNavigation();
 	const [issueDataList, setIssueDataList] = useState<IssueData[]>([]);
 	const [heartState, setHeartState] = useState<boolean>(false);
 
@@ -64,6 +66,9 @@ const IssueList: React.FC = () => {
 					issueData={issueData}
 					onLikeToggle={() => handleLikeToggle(index)}
 					heartState={heartState}
+					navigateToCommunityScreen={(data) => {
+						navigation.navigate("CommunityScreen", { issueData: data });
+					}}
 				/>
 			))}
 		</ScrollView>
