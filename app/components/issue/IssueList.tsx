@@ -11,6 +11,7 @@ import Icon_Comment from "@assets/images/Icon_Comment.svg";
 import Icon_Hot from "@assets/images/Icon_Hot.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useNavigation } from "@react-navigation/native";
 
 interface IssueData {
 	title: string;
@@ -73,8 +74,8 @@ const IssueList: React.FC = () => {
 	return (
 		<ScrollView style={styles.container}>
 			{issueDataList.map((issueData, index) => (
-				<>
-					<View key={index} style={styles.paddingContent}>
+				<React.Fragment key={index}>
+					<View style={styles.paddingContent}>
 						<Icon_Hot />
 
 						<Text style={styles.title}>{issueData.title}</Text>
@@ -107,7 +108,7 @@ const IssueList: React.FC = () => {
 						</Text>
 					</View>
 					<View style={styles.textBottomLine}></View>
-				</>
+				</React.Fragment>
 			))}
 		</ScrollView>
 	);
