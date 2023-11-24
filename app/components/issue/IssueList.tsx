@@ -82,6 +82,44 @@ const IssueList: React.FC = () => {
 					<View style={styles.textBottomLine}></View>
 				</>
 			)}
+
+			{issueData && (
+				<>
+					<View style={styles.paddingContent}>
+						<Icon_Hot />
+
+						<Text style={styles.title}>{issueData.title}</Text>
+
+						<View style={styles.detailsContainer}>
+							<Icon_Good style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>
+								좋아요 {issueData.likeCount}개
+							</Text>
+							<Text style={styles.textLine}></Text>
+							<Icon_Comment style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>
+								댓글 {issueData.commentCount}개
+							</Text>
+							<Text style={styles.textLine}></Text>
+							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+							<View style={styles.iconContainer}>
+								<TouchableOpacity onPress={toggleHeart}>
+									<FontAwesomeIcon
+										icon={faHeart}
+										size={20}
+										color={isHeartFilled ? "#80808064" : "#FFB800"}
+									/>
+								</TouchableOpacity>
+							</View>
+						</View>
+
+						<Text style={styles.textContent} numberOfLines={2}>
+							{issueData.content}
+						</Text>
+					</View>
+					<View style={styles.textBottomLine}></View>
+				</>
+			)}
 		</ScrollView>
 	);
 };
