@@ -21,33 +21,60 @@ interface IssueData {
 }
 
 const IssueList: React.FC = () => {
-	const [issueData, setIssueData] = useState<IssueData | null>(null);
+	const [issueDataList, setIssueDataList] = useState<IssueData[]>([]);
 
 	useEffect(() => {
-		// 백엔드 데이터 예시
-		const responseData: IssueData = {
-			title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
-			likeCount: 100,
-			commentCount: 50,
-			createdTime: "1시간 전",
-			content:
-				"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
-		};
+		// 백엔드에서 데이터를 받아와서 issueDataList 상태에 설정
+		// 예시로 더미 데이터 사용
+		const responseData: IssueData[] = [
+			{
+				title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
+				likeCount: 100,
+				commentCount: 50,
+				createdTime: "1시간 전",
+				content:
+					"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
+			},
+			{
+				title: "빠른년생 폐지에 대해 어떻게 생각하시나요?",
+				likeCount: 20,
+				commentCount: 30,
+				createdTime: "1시간 전",
+				content:
+					"다들 빠른년생 폐지에 대해 어떻게 생각하시나요..? 전 솔직히 폐지해야 한다고 생각합니다..",
+			},
+		];
 
-		setIssueData(responseData);
+		setIssueDataList(responseData);
 	}, []);
 
-	const [isHeartFilled, setIsHeartFilled] = useState(false);
+	const [heartStates, setHeartStates] = useState<boolean[]>([]);
 
-	const toggleHeart = () => {
-		setIsHeartFilled((prev) => !prev);
+	const toggleHeart = (index: number) => {
+		setIssueDataList((prevIssueDataList) => {
+			const updatedIssueDataList = [...prevIssueDataList];
+			const updatedIssueData = { ...updatedIssueDataList[index] };
+
+			updatedIssueData.likeCount = heartStates[index]
+				? updatedIssueData.likeCount - 1
+				: updatedIssueData.likeCount + 1;
+
+			updatedIssueDataList[index] = updatedIssueData;
+
+			const newHeartStates = [...heartStates];
+			newHeartStates[index] = !newHeartStates[index];
+
+			setHeartStates(newHeartStates);
+
+			return updatedIssueDataList;
+		});
 	};
 
 	return (
 		<ScrollView style={styles.container}>
-			{issueData && (
+			{issueDataList.map((issueData, index) => (
 				<>
-					<View style={styles.paddingContent}>
+					<View key={index} style={styles.paddingContent}>
 						<Icon_Hot />
 
 						<Text style={styles.title}>{issueData.title}</Text>
@@ -65,11 +92,11 @@ const IssueList: React.FC = () => {
 							<Text style={styles.textLine}></Text>
 							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
 							<View style={styles.iconContainer}>
-								<TouchableOpacity onPress={toggleHeart}>
+								<TouchableOpacity onPress={() => toggleHeart(index)}>
 									<FontAwesomeIcon
 										icon={faHeart}
 										size={20}
-										color={isHeartFilled ? "#80808064" : "#FFB800"}
+										color={heartStates[index] ? "#FFB800" : "#80808064"}
 									/>
 								</TouchableOpacity>
 							</View>
@@ -81,45 +108,7 @@ const IssueList: React.FC = () => {
 					</View>
 					<View style={styles.textBottomLine}></View>
 				</>
-			)}
-
-			{issueData && (
-				<>
-					<View style={styles.paddingContent}>
-						<Icon_Hot />
-
-						<Text style={styles.title}>{issueData.title}</Text>
-
-						<View style={styles.detailsContainer}>
-							<Icon_Good style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>
-								좋아요 {issueData.likeCount}개
-							</Text>
-							<Text style={styles.textLine}></Text>
-							<Icon_Comment style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>
-								댓글 {issueData.commentCount}개
-							</Text>
-							<Text style={styles.textLine}></Text>
-							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-							<View style={styles.iconContainer}>
-								<TouchableOpacity onPress={toggleHeart}>
-									<FontAwesomeIcon
-										icon={faHeart}
-										size={20}
-										color={isHeartFilled ? "#80808064" : "#FFB800"}
-									/>
-								</TouchableOpacity>
-							</View>
-						</View>
-
-						<Text style={styles.textContent} numberOfLines={2}>
-							{issueData.content}
-						</Text>
-					</View>
-					<View style={styles.textBottomLine}></View>
-				</>
-			)}
+			))}
 		</ScrollView>
 	);
 };
