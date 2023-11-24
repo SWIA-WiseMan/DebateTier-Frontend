@@ -1,5 +1,3 @@
-// IssueList.tsx
-
 import React, { useState, useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import IssueItem from "@components/issue/IssueItem";
@@ -54,7 +52,7 @@ const IssueList: React.FC = () => {
 			return issueData;
 		});
 
-		setHeartState(!heartState); // 하트 상태 업데이트
+		setHeartState(!heartState);
 		setIssueDataList(updatedIssueDataList);
 	};
 
