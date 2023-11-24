@@ -21,60 +21,43 @@ interface IssueData {
 	content: string;
 }
 
-const IssueList: React.FC = () => {
-	const [issueDataList, setIssueDataList] = useState<IssueData[]>([]);
+const IssueItem: React.FC = () => {
+	const [issueData, setIssueData] = useState<IssueData>({
+		title: "",
+		likeCount: 0,
+		commentCount: 0,
+		createdTime: "",
+		content: "",
+	});
 
 	useEffect(() => {
-		// 백엔드에서 데이터를 받아와서 issueDataList 상태에 설정
-		// 예시로 더미 데이터 사용
-		const responseData: IssueData[] = [
-			{
-				title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
-				likeCount: 100,
-				commentCount: 50,
-				createdTime: "1시간 전",
-				content:
-					"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
-			},
-			{
-				title: "빠른년생 폐지에 대해 어떻게 생각하시나요?",
-				likeCount: 30,
-				commentCount: 20,
-				createdTime: "1시간 전",
-				content:
-					"다들 빠른년생 폐지에 대해 어떻게 생각하시나요..? 전 솔직히 폐지해야 한다고 생각합니다..",
-			},
-		];
+		const responseData: IssueData = {
+			title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
+			likeCount: 100,
+			commentCount: 50,
+			createdTime: "1시간 전",
+			content:
+				"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
+		};
 
-		setIssueDataList(responseData);
+		setIssueData(responseData);
 	}, []);
 
-	const [heartStates, setHeartStates] = useState<boolean[]>([]);
+	const [isHeartFilled, setIsHeartFilled] = useState(false);
+	const [likeCount, setLikeCount] = useState(issueData.likeCount);
 
-	const toggleHeart = (index: number) => {
-		setIssueDataList((prevIssueDataList) => {
-			const updatedIssueDataList = [...prevIssueDataList];
-			const updatedIssueData = { ...updatedIssueDataList[index] };
-
-			updatedIssueData.likeCount = heartStates[index]
-				? updatedIssueData.likeCount - 1
-				: updatedIssueData.likeCount + 1;
-
-			updatedIssueDataList[index] = updatedIssueData;
-
-			const newHeartStates = [...heartStates];
-			newHeartStates[index] = !newHeartStates[index];
-
-			setHeartStates(newHeartStates);
-
-			return updatedIssueDataList;
-		});
+	const toggleHeart = () => {
+		setIsHeartFilled((prev) => !prev);
+		setIssueData((prevIssueData) => ({
+			...prevIssueData,
+			likeCount: prevIssueData.likeCount + (isHeartFilled ? -1 : 1),
+		}));
 	};
 
 	return (
 		<ScrollView style={styles.container}>
-			{issueDataList.map((issueData, index) => (
-				<React.Fragment key={index}>
+			{issueData && (
+				<>
 					<View style={styles.paddingContent}>
 						<Icon_Hot />
 
@@ -83,7 +66,7 @@ const IssueList: React.FC = () => {
 						<View style={styles.detailsContainer}>
 							<Icon_Good style={styles.textWithMargin} />
 							<Text style={styles.textWithMargin}>
-								좋아요 {issueData.likeCount}개
+								좋아요 {issueData.likeCount}
 							</Text>
 							<Text style={styles.textLine}></Text>
 							<Icon_Comment style={styles.textWithMargin} />
@@ -93,11 +76,11 @@ const IssueList: React.FC = () => {
 							<Text style={styles.textLine}></Text>
 							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
 							<View style={styles.iconContainer}>
-								<TouchableOpacity onPress={() => toggleHeart(index)}>
+								<TouchableOpacity onPress={toggleHeart}>
 									<FontAwesomeIcon
 										icon={faHeart}
 										size={20}
-										color={heartStates[index] ? "#FFB800" : "#80808064"}
+										color={isHeartFilled ? "#FFB800" : "#80808064"}
 									/>
 								</TouchableOpacity>
 							</View>
@@ -108,8 +91,8 @@ const IssueList: React.FC = () => {
 						</Text>
 					</View>
 					<View style={styles.textBottomLine}></View>
-				</React.Fragment>
-			))}
+				</>
+			)}
 		</ScrollView>
 	);
 };
@@ -161,4 +144,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default IssueList;
+export default IssueItem;
