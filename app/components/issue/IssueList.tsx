@@ -25,14 +25,16 @@ const IssueList: React.FC = () => {
 				likeCount: 100,
 				commentCount: 50,
 				createdTime: "1시간 전",
-				content: "님들 이건 솔직히 아니지 않나요?...",
+				content:
+					"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
 			},
 			{
 				title: "빠른년생 폐지에 대해 어떻게 생각하시나요?",
 				likeCount: 30,
 				commentCount: 20,
 				createdTime: "1시간 전",
-				content: "다들 빠른년생 폐지에 대해 어떻게 생각하시나요..?",
+				content:
+					"다들 빠른년생 폐지에 대해 어떻게 생각하시나요..? 전 솔직히 폐지해야 한다고 생각합니다..",
 			},
 		];
 

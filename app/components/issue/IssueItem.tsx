@@ -35,37 +35,41 @@ const IssueItem: React.FC<IssueItemProps> = ({
 	};
 
 	return (
-		<View style={styles.paddingContent}>
-			<Icon_Hot />
+		<View>
+			<View style={styles.paddingContent}>
+				<Icon_Hot />
 
-			<Text style={styles.title}>{issueData.title}</Text>
+				<Text style={styles.title}>{issueData.title}</Text>
 
-			<View style={styles.detailsContainer}>
-				<Icon_Good style={styles.textWithMargin} />
-				<Text style={styles.textWithMargin}>
-					좋아요 {issueData.likeCount}개
-				</Text>
-				<Text style={styles.textLine}></Text>
-				<Icon_Comment style={styles.textWithMargin} />
-				<Text style={styles.textWithMargin}>
-					댓글 {issueData.commentCount}개
-				</Text>
-				<Text style={styles.textLine}></Text>
-				<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-				<View style={styles.iconContainer}>
-					<TouchableOpacity onPress={toggleHeart}>
-						<FontAwesomeIcon
-							icon={faHeart}
-							size={20}
-							color={isHeartFilled ? "#FFB800" : "#80808064"}
-						/>
-					</TouchableOpacity>
+				<View style={styles.detailsContainer}>
+					<Icon_Good style={styles.textWithMargin} />
+					<Text style={styles.textWithMargin}>
+						좋아요 {issueData.likeCount}개
+					</Text>
+					<Text style={styles.textLine}></Text>
+					<Icon_Comment style={styles.textWithMargin} />
+					<Text style={styles.textWithMargin}>
+						댓글 {issueData.commentCount}개
+					</Text>
+					<Text style={styles.textLine}></Text>
+					<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+					<View style={styles.iconContainer}>
+						<TouchableOpacity onPress={toggleHeart}>
+							<FontAwesomeIcon
+								icon={faHeart}
+								size={20}
+								color={isHeartFilled ? "#FFB800" : "#80808064"}
+							/>
+						</TouchableOpacity>
+					</View>
 				</View>
+
+				<Text style={styles.textContent} numberOfLines={2}>
+					{issueData.content}
+				</Text>
 			</View>
 
-			<Text style={styles.textContent} numberOfLines={2}>
-				{issueData.content}
-			</Text>
+			<View style={styles.textBottomLine}></View>
 		</View>
 	);
 };
@@ -78,17 +82,20 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 22,
+		fontFamily: "Roboto",
 		fontWeight: "800",
 		marginBottom: 8,
 	},
 	detailsContainer: {
 		flexDirection: "row",
+		fontFamily: "Roboto",
 		alignItems: "center",
 		marginBottom: 7,
 		marginLeft: 3,
 	},
 	textWithMargin: {
 		fontSize: 10,
+		fontFamily: "Roboto",
 		fontWeight: "400",
 		marginRight: 7,
 	},
@@ -102,6 +109,7 @@ const styles = StyleSheet.create({
 	},
 	textContent: {
 		fontSize: 14,
+		fontFamily: "Roboto",
 		fontWeight: "500",
 	},
 	textBottomLine: {
