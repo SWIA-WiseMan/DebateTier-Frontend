@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	ScrollView,
-	TouchableOpacity,
-} from "react-native";
+// IssueItem.tsx
+
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Icon_Good from "@assets/images/Icon_Good.svg";
 import Icon_Comment from "@assets/images/Icon_Comment.svg";
 import Icon_Hot from "@assets/images/Icon_Hot.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useNavigation } from "@react-navigation/native";
 
 interface IssueData {
 	title: string;
@@ -21,86 +16,61 @@ interface IssueData {
 	content: string;
 }
 
-const IssueItem: React.FC = () => {
-	const [issueData, setIssueData] = useState<IssueData>({
-		title: "",
-		likeCount: 0,
-		commentCount: 0,
-		createdTime: "",
-		content: "",
-	});
+interface IssueItemProps {
+	issueData: IssueData;
+	onLikeToggle: () => void;
+	heartState: boolean;
+}
 
-	useEffect(() => {
-		const responseData: IssueData = {
-			title: "후쿠시마 오염수 방류에 대해 어떻게 생각하시나요?",
-			likeCount: 100,
-			commentCount: 50,
-			createdTime: "1시간 전",
-			content:
-				"님들 이건 솔직히 아니지 않나요? 다들 회 안 먹고싶어요? 난 진짜 못믿겠음 일본... 이제 연어 못 먹을 듯ㅜ 글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트글자수테스트",
-		};
-
-		setIssueData(responseData);
-	}, []);
-
-	const [isHeartFilled, setIsHeartFilled] = useState(false);
-	const [likeCount, setLikeCount] = useState(issueData.likeCount);
+const IssueItem: React.FC<IssueItemProps> = ({
+	issueData,
+	onLikeToggle,
+	heartState,
+}) => {
+	const [isHeartFilled, setIsHeartFilled] = useState(heartState);
 
 	const toggleHeart = () => {
 		setIsHeartFilled((prev) => !prev);
-		setIssueData((prevIssueData) => ({
-			...prevIssueData,
-			likeCount: prevIssueData.likeCount + (isHeartFilled ? -1 : 1),
-		}));
+		onLikeToggle();
 	};
 
 	return (
-		<ScrollView style={styles.container}>
-			{issueData && (
-				<>
-					<View style={styles.paddingContent}>
-						<Icon_Hot />
+		<View style={styles.paddingContent}>
+			<Icon_Hot />
 
-						<Text style={styles.title}>{issueData.title}</Text>
+			<Text style={styles.title}>{issueData.title}</Text>
 
-						<View style={styles.detailsContainer}>
-							<Icon_Good style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>
-								좋아요 {issueData.likeCount}
-							</Text>
-							<Text style={styles.textLine}></Text>
-							<Icon_Comment style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>
-								댓글 {issueData.commentCount}개
-							</Text>
-							<Text style={styles.textLine}></Text>
-							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-							<View style={styles.iconContainer}>
-								<TouchableOpacity onPress={toggleHeart}>
-									<FontAwesomeIcon
-										icon={faHeart}
-										size={20}
-										color={isHeartFilled ? "#FFB800" : "#80808064"}
-									/>
-								</TouchableOpacity>
-							</View>
-						</View>
+			<View style={styles.detailsContainer}>
+				<Icon_Good style={styles.textWithMargin} />
+				<Text style={styles.textWithMargin}>
+					좋아요 {issueData.likeCount}개
+				</Text>
+				<Text style={styles.textLine}></Text>
+				<Icon_Comment style={styles.textWithMargin} />
+				<Text style={styles.textWithMargin}>
+					댓글 {issueData.commentCount}개
+				</Text>
+				<Text style={styles.textLine}></Text>
+				<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+				<View style={styles.iconContainer}>
+					<TouchableOpacity onPress={toggleHeart}>
+						<FontAwesomeIcon
+							icon={faHeart}
+							size={20}
+							color={isHeartFilled ? "#FFB800" : "#80808064"}
+						/>
+					</TouchableOpacity>
+				</View>
+			</View>
 
-						<Text style={styles.textContent} numberOfLines={2}>
-							{issueData.content}
-						</Text>
-					</View>
-					<View style={styles.textBottomLine}></View>
-				</>
-			)}
-		</ScrollView>
+			<Text style={styles.textContent} numberOfLines={2}>
+				{issueData.content}
+			</Text>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#FFFFFF",
-	},
 	paddingContent: {
 		padding: 20,
 		paddingTop: 10,
@@ -108,7 +78,6 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 22,
-		fontFamily: "Roboto",
 		fontWeight: "800",
 		marginBottom: 8,
 	},
@@ -120,7 +89,6 @@ const styles = StyleSheet.create({
 	},
 	textWithMargin: {
 		fontSize: 10,
-		fontFamily: "Roboto",
 		fontWeight: "400",
 		marginRight: 7,
 	},
@@ -134,7 +102,6 @@ const styles = StyleSheet.create({
 	},
 	textContent: {
 		fontSize: 14,
-		fontFamily: "Roboto",
 		fontWeight: "500",
 	},
 	textBottomLine: {
