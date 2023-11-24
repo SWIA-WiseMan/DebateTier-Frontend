@@ -47,34 +47,39 @@ const IssueList: React.FC = () => {
 		<ScrollView style={styles.container}>
 			{issueData && (
 				<>
-					<Icon_Hot />
+					<View style={styles.paddingContent}>
+						<Icon_Hot />
 
-					<Text style={styles.title}>{issueData.title}</Text>
+						<Text style={styles.title}>{issueData.title}</Text>
 
-					<View style={styles.detailsContainer}>
-						<Icon_Good style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							좋아요 {issueData.likeCount}개
-						</Text>
-						<Text style={styles.textLine}></Text>
-						<Icon_Comment style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							댓글 {issueData.commentCount}개
-						</Text>
-						<Text style={styles.textLine}></Text>
-						<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-						<View style={styles.iconContainer}>
-							<TouchableOpacity onPress={toggleHeart}>
-								<FontAwesomeIcon
-									icon={faHeart}
-									size={20}
-									color={isHeartFilled ? "#80808064" : "#FFB800"}
-								/>
-							</TouchableOpacity>
+						<View style={styles.detailsContainer}>
+							<Icon_Good style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>
+								좋아요 {issueData.likeCount}개
+							</Text>
+							<Text style={styles.textLine}></Text>
+							<Icon_Comment style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>
+								댓글 {issueData.commentCount}개
+							</Text>
+							<Text style={styles.textLine}></Text>
+							<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+							<View style={styles.iconContainer}>
+								<TouchableOpacity onPress={toggleHeart}>
+									<FontAwesomeIcon
+										icon={faHeart}
+										size={20}
+										color={isHeartFilled ? "#80808064" : "#FFB800"}
+									/>
+								</TouchableOpacity>
+							</View>
 						</View>
-					</View>
 
-					<Text numberOfLines={2}>{issueData.content}</Text>
+						<Text style={styles.textContent} numberOfLines={2}>
+							{issueData.content}
+						</Text>
+					</View>
+					<View style={styles.textBottomLine}></View>
 				</>
 			)}
 		</ScrollView>
@@ -83,12 +88,12 @@ const IssueList: React.FC = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		padding: 20,
-		paddingBottom: 10,
-		borderBottomWidth: 1,
 		backgroundColor: "#FFFFFF",
-		borderBottomColor: "#CCCCCC",
+	},
+	paddingContent: {
+		padding: 20,
+		paddingTop: 10,
+		paddingBottom: 10,
 	},
 	title: {
 		fontSize: 22,
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
 	detailsContainer: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginBottom: 5,
+		marginBottom: 7,
 		marginLeft: 3,
 	},
 	textWithMargin: {
@@ -120,6 +125,11 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		fontFamily: "Roboto",
 		fontWeight: "500",
+	},
+	textBottomLine: {
+		marginTop: 7,
+		borderBottomWidth: 1,
+		borderBottomColor: "#ECECEC99",
 	},
 });
 
