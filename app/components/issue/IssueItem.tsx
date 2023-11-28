@@ -1,3 +1,4 @@
+// components/issue/IssueList.tsx
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -5,6 +6,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Icon_Good from "@assets/images/Icon_Good.svg";
 import Icon_Comment from "@assets/images/Icon_Comment.svg";
 import Icon_Hot from "@assets/images/Icon_Hot.svg";
+import { useNavigation } from "@react-navigation/native";
 
 interface IssueData {
 	title: string;
@@ -18,12 +20,14 @@ interface IssueItemProps {
 	issueData: IssueData;
 	onLikeToggle: () => void;
 	heartState: boolean;
+	navigateToCommunityScreen: (issueData: IssueData) => void;
 }
 
 const IssueItem: React.FC<IssueItemProps> = ({
 	issueData,
 	onLikeToggle,
 	heartState,
+	navigateToCommunityScreen,
 }) => {
 	const [isHeartFilled, setIsHeartFilled] = useState(heartState);
 
@@ -33,42 +37,44 @@ const IssueItem: React.FC<IssueItemProps> = ({
 	};
 
 	return (
-		<View>
-			<View style={styles.paddingContent}>
-				<Icon_Hot />
+		<TouchableOpacity onPress={() => navigateToCommunityScreen(issueData)}>
+			<View>
+				<View style={styles.paddingContent}>
+					<Icon_Hot />
 
-				<Text style={styles.title}>{issueData.title}</Text>
+					<Text style={styles.title}>{issueData.title}</Text>
 
-				<View style={styles.detailsContainer}>
-					<Icon_Good style={styles.textWithMargin} />
-					<Text style={styles.textWithMargin}>
-						좋아요 {issueData.likeCount}개
-					</Text>
-					<Text style={styles.textLine}></Text>
-					<Icon_Comment style={styles.textWithMargin} />
-					<Text style={styles.textWithMargin}>
-						댓글 {issueData.commentCount}개
-					</Text>
-					<Text style={styles.textLine}></Text>
-					<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-					<View style={styles.iconContainer}>
-						<TouchableOpacity onPress={toggleHeart}>
-							<FontAwesomeIcon
-								icon={faHeart}
-								size={20}
-								color={isHeartFilled ? "#FFB800" : "#80808064"}
-							/>
-						</TouchableOpacity>
+					<View style={styles.detailsContainer}>
+						<Icon_Good style={styles.textWithMargin} />
+						<Text style={styles.textWithMargin}>
+							좋아요 {issueData.likeCount}개
+						</Text>
+						<Text style={styles.textLine}></Text>
+						<Icon_Comment style={styles.textWithMargin} />
+						<Text style={styles.textWithMargin}>
+							댓글 {issueData.commentCount}개
+						</Text>
+						<Text style={styles.textLine}></Text>
+						<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+						<View style={styles.iconContainer}>
+							<TouchableOpacity onPress={toggleHeart}>
+								<FontAwesomeIcon
+									icon={faHeart}
+									size={20}
+									color={isHeartFilled ? "#FFB800" : "#80808064"}
+								/>
+							</TouchableOpacity>
+						</View>
 					</View>
+
+					<Text style={styles.textContent} numberOfLines={2}>
+						{issueData.content}
+					</Text>
 				</View>
 
-				<Text style={styles.textContent} numberOfLines={2}>
-					{issueData.content}
-				</Text>
+				<View style={styles.textBottomLine}></View>
 			</View>
-
-			<View style={styles.textBottomLine}></View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
