@@ -12,7 +12,7 @@ interface IssueData {
 }
 
 const IssueList: React.FC = () => {
-	const navigation = useNavigation();
+	const navigation: any = useNavigation();
 	const [issueDataList, setIssueDataList] = useState<IssueData[]>([]);
 	const [heartState, setHeartState] = useState<boolean>(false);
 
