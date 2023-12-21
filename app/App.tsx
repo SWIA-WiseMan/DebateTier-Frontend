@@ -1,46 +1,63 @@
-import NavigationManager from "@screens/NativationManager";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
-import "react-native-gesture-handler";
+import SplashScreen from "@screens/auth/SplashScreen";
+import LoginScreen from "@screens/auth/LoginScreen";
+import NavigationManager from "@screens/NativationManager";
 
-import ToronTierIcon_1 from "@assets/images/splash/Icon_Torontier_1.svg";
-import ToronTierIcon_2 from "@assets/images/splash/Icon_Torontier_2.svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { AppRegistry } from "react-native";
 
 const App: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(true);
-	const [isFirstIconVisible, setIsFirstIconVisible] = useState(true);
-	const [isSecondIconVisible, setIsSecondIconVisible] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	AppRegistry.registerComponent("torontier", () => App);
 
 	useEffect(() => {
 		setTimeout(() => {
-			setIsFirstIconVisible(false);
-			setIsSecondIconVisible(true);
-		}, 2000);
-
-		setTimeout(() => {
 			setIsLoading(false);
+			setLoggedInToFalse;
+		}, 4000);
+	}, []);
+	useEffect(() => {
+		setTimeout(() => {
+			checkLoginStatus();
 		}, 2000);
 	}, []);
 
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		setIsLoggedIn(true);
+	// 	}, 20000);
+	// }, []);
+
+	const setLoggedInToFalse = async () => {
+		try {
+			await AsyncStorage.setItem("isLoggedIn", "false");
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	const checkLoginStatus = async () => {
+		try {
+			const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
+			console.log(isLoggedIn);
+			setIsLoggedIn(isLoggedIn === "true");
+			setIsLoading(false);
+		} catch (error) {
+			console.log(error);
+			setIsLoading(false);
+		}
+	};
+
 	if (isLoading) {
-		return (
-			<View style={styles.container}>
-				{isFirstIconVisible && <ToronTierIcon_1 />}
-				{isSecondIconVisible && <ToronTierIcon_2 />}
-			</View>
-		);
+		return <SplashScreen />;
+	} else if (isLoggedIn) {
+		return <NavigationManager />;
+	} else {
+		return <LoginScreen />;
 	}
-
-	return <NavigationManager />;
 };
-
-const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#FFB800",
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-});
 
 export default App;
