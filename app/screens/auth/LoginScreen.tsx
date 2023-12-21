@@ -6,17 +6,17 @@ import ToronTierIcon from "@assets/images/login/Icon_Torontier.svg";
 import KakaoLoginIcon from "@assets/images/login/Icon_KakaoLogin.svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-const setLoggedIn = async () => {
-	try {
-		console.log("Touched");
-		await AsyncStorage.setItem("isLoggedIn", "true");
-		await AsyncStorage.getItem("isLoggedIn");
-	} catch (e) {
-		console.log(e);
-	}
-};
+const LoginScreen: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
+	const handleLoginButtonPress = async () => {
+		try {
+			console.log("Touched");
+			await AsyncStorage.setItem("isLoggedIn", "true");
+			onLogin(); // isLoggedIn 값 변경 후 onLogin 함수를 호출하여 로그인 상태를 업데이트합니다.
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
-function LoginScreen() {
 	return (
 		<View style={styles.container}>
 			<ToronTierIcon />
@@ -26,13 +26,13 @@ function LoginScreen() {
 				<Text style={styles.line}> ─────</Text>
 			</View>
 			<GestureHandlerRootView>
-				<TouchableOpacity onPress={setLoggedIn}>
+				<TouchableOpacity onPress={handleLoginButtonPress}>
 					<KakaoLoginIcon />
 				</TouchableOpacity>
 			</GestureHandlerRootView>
 		</View>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	container: {

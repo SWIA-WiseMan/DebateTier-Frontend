@@ -15,8 +15,8 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
+			clearAll();
 			setIsLoading(false);
-			setLoggedInToFalse;
 		}, 4000);
 	}, []);
 	useEffect(() => {
@@ -31,14 +31,13 @@ const App: React.FC = () => {
 	// 	}, 20000);
 	// }, []);
 
-	const setLoggedInToFalse = async () => {
+	const clearAll = async () => {
 		try {
-			await AsyncStorage.setItem("isLoggedIn", "false");
+			await AsyncStorage.clear();
 		} catch (e) {
-			console.log(e);
+			// 오류 예외 처리
 		}
 	};
-
 	const checkLoginStatus = async () => {
 		try {
 			const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
@@ -56,7 +55,7 @@ const App: React.FC = () => {
 	} else if (isLoggedIn) {
 		return <NavigationManager />;
 	} else {
-		return <LoginScreen />;
+		return <LoginScreen onLogin={checkLoginStatus} />;
 	}
 };
 
