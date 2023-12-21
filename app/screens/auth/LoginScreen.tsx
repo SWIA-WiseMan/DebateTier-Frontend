@@ -1,5 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ToronTierIcon from "@assets/images/login/Icon_Torontier.svg";
@@ -10,7 +8,7 @@ const LoginScreen: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
 	const handleLoginButtonPress = async () => {
 		try {
 			console.log("Touched");
-			await AsyncStorage.setItem("isLoggedIn", "true");
+			//await AsyncStorage.setItem("isLoggedIn", "true");
 			onLogin(); // isLoggedIn 값 변경 후 onLogin 함수를 호출하여 로그인 상태를 업데이트합니다.
 		} catch (e) {
 			console.log(e);
