@@ -1,6 +1,14 @@
 {
 	"extends": "@tsconfig/react-native/tsconfig.json",
 	"compilerOptions": {
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+			"@assets/*": ["app/assets/*"],
+			"@components/*": ["app/components/*"],
+			"@screens/*": ["app/screens/*"],
+			"@utils/*": ["app/utils/*"]
+		}
 	}
 }
