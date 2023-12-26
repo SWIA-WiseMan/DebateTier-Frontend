@@ -79,12 +79,8 @@ const styles = StyleSheet.create({
 	container: {
 		paddingTop: 12,
 		paddingHorizontal: 16,
+		width: "100%",
 		backgroundColor: "#FFFFFF",
-	},
-	issueobject: {
-		paddingTop: 12,
-		paddingBottom: 14,
-		paddingHorizontal: 16,
 	},
 });
 

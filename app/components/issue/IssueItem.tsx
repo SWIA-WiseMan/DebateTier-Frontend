@@ -35,41 +35,46 @@ const IssueItem: React.FC<IssueItemProps> = ({
 		setIsHeartFilled((prev) => !prev);
 		onLikeToggle();
 	};
+	//<Icon_Hot />
+
+	// <TouchableOpacity onPress={toggleHeart}>
+	// 								<FontAwesomeIcon
+	// 									icon={faHeart}
+	// 									size={20}
+	// 									color={isHeartFilled ? "#FFB800" : "#80808064"}
+	// 								/>
+	// 							</TouchableOpacity>
+
+	// <View style={styles.detailsContainer}>
+	// 					<Text style={styles.textLine}></Text>
+	// 					<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
+	// 					<View style={styles.iconContainer}></View>
+	// 				</View>
 
 	return (
 		<TouchableOpacity onPress={() => navigateToCommunityScreen(issueData)}>
 			<View>
-				<View style={styles.paddingContent}>
-					<Icon_Hot />
-
-					<Text style={styles.title}>{issueData.title}</Text>
-
-					<View style={styles.detailsContainer}>
-						<Icon_Good style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							좋아요 {issueData.likeCount}개
+				<View style={styles.container}>
+					<View style={styles.leftContentsContainer}>
+						<Text style={styles.title}>{issueData.title}</Text>
+						<Text style={styles.textContent} numberOfLines={3}>
+							{issueData.content}
 						</Text>
-						<Text style={styles.textLine}></Text>
-						<Icon_Comment style={styles.textWithMargin} />
-						<Text style={styles.textWithMargin}>
-							댓글 {issueData.commentCount}개
-						</Text>
-						<Text style={styles.textLine}></Text>
-						<Text style={styles.textWithMargin}>{issueData.createdTime}</Text>
-						<View style={styles.iconContainer}>
-							<TouchableOpacity onPress={toggleHeart}>
-								<FontAwesomeIcon
-									icon={faHeart}
-									size={20}
-									color={isHeartFilled ? "#FFB800" : "#80808064"}
-								/>
-							</TouchableOpacity>
+					</View>
+					<View style={styles.rightContentsContainer}>
+						<View style={styles.profileImg}>
+							<Icon_Good />
+						</View>
+						<View style={styles.likeCommentCount}>
+							<Icon_Good style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>{issueData.likeCount}개</Text>
+							<Text style={styles.textLine}></Text>
+							<Icon_Comment style={styles.textWithMargin} />
+							<Text style={styles.textWithMargin}>
+								{issueData.commentCount}개
+							</Text>
 						</View>
 					</View>
-
-					<Text style={styles.textContent} numberOfLines={2}>
-						{issueData.content}
-					</Text>
 				</View>
 
 				<View style={styles.textBottomLine}></View>
@@ -79,45 +84,50 @@ const IssueItem: React.FC<IssueItemProps> = ({
 };
 
 const styles = StyleSheet.create({
-	paddingContent: {
+	container: {
+		flex: 1,
+		flexDirection: "row",
 		paddingTop: 12,
 		paddingBottom: 14,
 		paddingHorizontal: 16,
 		backgroundColor: "#F6F6F6",
 	},
+	leftContentsContainer: { flex: 1 },
 	title: {
 		fontSize: 14,
-
 		fontFamily: "NotoSansKR.ttf",
-		marginBottom: 8,
+		fontWeight: "800",
 		letterSpacing: -1,
+		marginBottom: 4,
 	},
+	textContent: {
+		fontSize: 12,
+		fontFamily: "Roboto",
+		fontWeight: "500",
+	},
+	rightContentsContainer: { paddingLeft: 14, alignContent: "center" },
+	profileImg: { width: 40, height: 40, backgroundColor: "#000000", flex: 1 },
+	likeCommentCount: { flexDirection: "row" },
+
 	detailsContainer: {
+		flex: 1,
 		flexDirection: "row",
 		fontFamily: "Roboto",
 		alignItems: "center",
-		marginBottom: 7,
-		marginLeft: 3,
 	},
 	textWithMargin: {
 		fontSize: 10,
 		fontFamily: "Roboto",
 		fontWeight: "400",
-		marginRight: 7,
 	},
 	textLine: {
-		marginRight: 7,
 		borderRightWidth: 1,
 		borderRightColor: "#E6E6E6",
 	},
 	iconContainer: {
 		marginLeft: "auto",
 	},
-	textContent: {
-		fontSize: 14,
-		fontFamily: "Roboto",
-		fontWeight: "500",
-	},
+
 	textBottomLine: {
 		marginTop: 7,
 		borderBottomWidth: 1,
