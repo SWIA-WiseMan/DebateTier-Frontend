@@ -80,15 +80,17 @@ const IssueItem: React.FC<IssueItemProps> = ({
 
 const styles = StyleSheet.create({
 	paddingContent: {
-		padding: 20,
-		paddingTop: 10,
-		paddingBottom: 10,
+		paddingTop: 12,
+		paddingBottom: 14,
+		paddingHorizontal: 16,
+		backgroundColor: "#F6F6F6",
 	},
 	title: {
-		fontSize: 22,
-		fontFamily: "Roboto",
-		fontWeight: "800",
+		fontSize: 14,
+
+		fontFamily: "NotoSansKR.ttf",
 		marginBottom: 8,
+		letterSpacing: -1,
 	},
 	detailsContainer: {
 		flexDirection: "row",
