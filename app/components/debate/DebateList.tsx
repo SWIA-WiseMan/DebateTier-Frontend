@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	ScrollView,
-	StyleSheet,
-	TouchableOpacity,
-	FlatList,
-} from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DebateItem from "@components/debate/DebateItem";
 
@@ -25,7 +18,7 @@ const DebateList: React.FC = () => {
 		// 예시로 더미 데이터 사용
 		const responseData: DebateData[] = [
 			{
-				title: "후쿠시마 오염수 방류",
+				title: "후쿠시마\n오염수 방류",
 				headCount: 23,
 				hour: 14,
 				minute: 23,
