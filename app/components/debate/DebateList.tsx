@@ -5,6 +5,7 @@ import {
 	ScrollView,
 	StyleSheet,
 	TouchableOpacity,
+	FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DebateItem from "@components/debate/DebateItem";
@@ -41,17 +42,31 @@ const DebateList: React.FC = () => {
 				hour: 14,
 				minute: 23,
 			},
+			{
+				title: "후쿠시마 오염수 방류",
+				headCount: 23,
+				hour: 14,
+				minute: 23,
+			},
+			{
+				title: "후쿠시마 오염수 방류",
+				headCount: 23,
+				hour: 14,
+				minute: 23,
+			},
 		];
 
 		setDebateDataList(responseData);
 	}, []);
 
 	return (
-		<ScrollView style={styles.container}>
-			{debateDataList.map((debateData, index) => (
-				<DebateItem key={index} debateData={debateData} />
-			))}
-		</ScrollView>
+		<FlatList
+			style={styles.container}
+			data={debateDataList}
+			keyExtractor={(item, index) => index.toString()}
+			renderItem={({ item }) => <DebateItem debateData={item} />}
+			numColumns={2}
+		/>
 	);
 };
 
