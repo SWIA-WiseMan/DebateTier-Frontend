@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
 
 import Header from "@components/common/Header";
+import DebateList from "@components/debate/DebateList";
 
 const DebateScreen: React.FC = () => {
 	const handleSharePress = () => {};
@@ -9,8 +10,8 @@ const DebateScreen: React.FC = () => {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<Header showShareButton={false} onSharePress={handleSharePress} />
-			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<Text>Debate Screen</Text>
+			<View style={{ flex: 1 }}>
+				<DebateList />
 			</View>
 		</SafeAreaView>
 	);

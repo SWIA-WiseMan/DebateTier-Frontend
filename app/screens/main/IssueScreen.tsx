@@ -2,7 +2,6 @@ import React from "react";
 import { SafeAreaView, View } from "react-native";
 
 import Header from "@components/common/Header";
-import Frame from "@components/issue/Frame";
 import IssueList from "@components/issue/IssueList";
 
 const IssueScreen: React.FC = () => {
@@ -12,7 +11,6 @@ const IssueScreen: React.FC = () => {
 		<SafeAreaView style={{ flex: 1 }}>
 			<Header showShareButton={false} onSharePress={handleSharePress} />
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				{/* <Frame /> */}
 				<IssueList />
 			</View>
 		</SafeAreaView>
