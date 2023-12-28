@@ -6,7 +6,6 @@ import "react-native-gesture-handler";
 
 import HomeScreen from "@screens/main/HomeScreen";
 import IssueScreen from "@screens/main/IssueScreen";
-import MypageScreen from "@screens/main/MypageScreen";
 import CommunityScreen from "@screens/issue/CommunityScreen";
 
 import HomeIcon from "@assets/images/navigation/Icon_Home.svg";
