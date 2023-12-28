@@ -77,6 +77,9 @@ const IssueList: React.FC = () => {
 
 const styles = StyleSheet.create({
 	container: {
+		paddingTop: 12,
+		paddingHorizontal: 16,
+		width: "100%",
 		backgroundColor: "#FFFFFF",
 	},
 });

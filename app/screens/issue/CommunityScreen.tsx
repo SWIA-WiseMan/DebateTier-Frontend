@@ -5,10 +5,11 @@ import { Text, View, StyleSheet } from "react-native";
 import Frame from "@components/issue/Frame";
 
 import Icon_Profile from "@assets/images/Icon_Profile.svg";
-import Icon_Good from "@assets/images/Icon_Good.svg";
-import Icon_Comment from "@assets/images/Icon_Comment.svg";
+import Icon_Good from "@assets/images/Issue/Icon_Good.svg";
+import Icon_Comment from "@assets/images/Issue/Icon_Comment.svg";
 import Icon_Empathy from "@assets/images/Icon_Empathy.svg";
 import Icon_Scrap from "@assets/images/Icon_Scrap.svg";
+import Header from "@components/common/Header";
 
 interface IssueData {
 	title: string;
