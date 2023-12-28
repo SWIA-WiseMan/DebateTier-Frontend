@@ -15,7 +15,7 @@ import Icon_Alarm from "@assets/images/Icon_Alarm.svg";
 const DebateList: React.FC = () => {
 	return (
 		<ScrollView>
-			<View style={{ alignSelf: "flex-start" }}>
+			<View>
 				<View style={styles.boxContainer}>
 					<View>
 						<View style={styles.iconLightMargin}>
