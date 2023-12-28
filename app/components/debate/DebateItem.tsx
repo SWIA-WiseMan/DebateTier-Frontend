@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	ScrollView,
-	StyleSheet,
-	TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Icon_Light from "@assets/images/Icon_Light.svg";
