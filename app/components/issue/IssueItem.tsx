@@ -1,10 +1,10 @@
 // components/issue/IssueList.tsx
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import Icon_Good from "@assets/images/Icon_Good.svg";
-import Icon_Comment from "@assets/images/Icon_Comment.svg";
+import Icon_Good from "@assets/images/Issue/Icon_Good.svg";
+import Icon_Comment from "@assets/images/Issue/Icon_Comment.svg";
 import Icon_Hot from "@assets/images/Icon_Hot.svg";
 import { useNavigation } from "@react-navigation/native";
 
@@ -52,7 +52,10 @@ const IssueItem: React.FC<IssueItemProps> = ({
 	// 				</View>
 
 	return (
-		<TouchableOpacity onPress={() => navigateToCommunityScreen(issueData)}>
+		<TouchableOpacity
+			onPress={() => navigateToCommunityScreen(issueData)}
+			style={{ marginBottom: 16 }}
+		>
 			<View>
 				<View style={styles.container}>
 					<View style={styles.leftContentsContainer}>
@@ -62,22 +65,23 @@ const IssueItem: React.FC<IssueItemProps> = ({
 						</Text>
 					</View>
 					<View style={styles.rightContentsContainer}>
-						<View style={styles.profileImg}>
-							<Icon_Good />
-						</View>
+						<Image
+							source={require("@assets/images/Issue/Img_Tmp.png")}
+							style={styles.ImgStyle}
+						/>
 						<View style={styles.likeCommentCount}>
-							<Icon_Good style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>{issueData.likeCount}개</Text>
+							<Icon_Good style={styles.iconImg} />
+							<Text style={[styles.textWithMargin, { color: "#ff5c00" }]}>
+								{issueData.likeCount}
+							</Text>
 							<Text style={styles.textLine}></Text>
-							<Icon_Comment style={styles.textWithMargin} />
-							<Text style={styles.textWithMargin}>
-								{issueData.commentCount}개
+							<Icon_Comment style={styles.iconImg} />
+							<Text style={[styles.textWithMargin, { color: "#0085ff" }]}>
+								{issueData.commentCount}
 							</Text>
 						</View>
 					</View>
 				</View>
-
-				<View style={styles.textBottomLine}></View>
 			</View>
 		</TouchableOpacity>
 	);
@@ -105,16 +109,26 @@ const styles = StyleSheet.create({
 		fontFamily: "Roboto",
 		fontWeight: "500",
 	},
-	rightContentsContainer: { paddingLeft: 14, alignContent: "center" },
-	profileImg: { width: 40, height: 40, backgroundColor: "#000000", flex: 1 },
-	likeCommentCount: { flexDirection: "row" },
-
-	detailsContainer: {
-		flex: 1,
-		flexDirection: "row",
-		fontFamily: "Roboto",
+	rightContentsContainer: {
+		paddingLeft: 14,
 		alignItems: "center",
+
+		justifyContent: "center",
 	},
+	ImgStyle: {
+		width: 56,
+		height: 56,
+		marginBottom: 6,
+	},
+	likeCommentCount: {
+		flexDirection: "row",
+	},
+	iconImg: {
+		height: 15,
+		width: 15,
+		paddingHorizontal: 10,
+	},
+
 	textWithMargin: {
 		fontSize: 10,
 		fontFamily: "Roboto",
@@ -124,10 +138,6 @@ const styles = StyleSheet.create({
 		borderRightWidth: 1,
 		borderRightColor: "#E6E6E6",
 	},
-	iconContainer: {
-		marginLeft: "auto",
-	},
-
 	textBottomLine: {
 		marginTop: 7,
 		borderBottomWidth: 1,
