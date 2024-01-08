@@ -11,7 +11,7 @@ const DebateScreen: React.FC = () => {
 		<SafeAreaView style={{ flex: 1 }}>
 			<Header showShareButton={false} onSharePress={handleSharePress} />
 			<View style={{ flex: 1 }}>
-				<DebateList />
+				<DebateList layout="vertical" />
 			</View>
 		</SafeAreaView>
 	);

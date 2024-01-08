@@ -66,7 +66,10 @@ const styles = StyleSheet.create({
 		width: 156,
 		height: 197,
 		margin: 16,
+		marginRight: 0,
+		marginBottom: 0,
 		borderRadius: 6,
+
 		backgroundColor: "#F6F6F6",
 		shadowColor: "#787878",
 		shadowOffset: {
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 4,
 		elevation: 4,
+		overflow: "hidden",
 	},
 	iconLightMargin: {
 		alignItems: "center",

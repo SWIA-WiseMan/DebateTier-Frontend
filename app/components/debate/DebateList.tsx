@@ -10,12 +10,14 @@ interface DebateData {
 	minute: number;
 }
 
-const DebateList: React.FC = () => {
+interface DebateListProps {
+	layout: "horizontal" | "vertical";
+}
+
+const DebateList: React.FC<DebateListProps> = ({ layout }) => {
 	const [debateDataList, setDebateDataList] = useState<DebateData[]>([]);
 
 	useEffect(() => {
-		// 백엔드에서 데이터를 받아와서 issueDataList 상태에 설정
-		// 예시로 더미 데이터 사용
 		const responseData: DebateData[] = [
 			{
 				title: "후쿠시마\n오염수 방류",
@@ -58,17 +60,16 @@ const DebateList: React.FC = () => {
 			data={debateDataList}
 			keyExtractor={(item, index) => index.toString()}
 			renderItem={({ item }) => <DebateItem debateData={item} />}
-			numColumns={2}
+			numColumns={layout === "vertical" ? 2 : 1}
+			horizontal={layout === "horizontal"}
+			contentContainerStyle={{ minHeight: 220 }}
 		/>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		width: "100%",
 		backgroundColor: "#FFFFFF",
-		padding: 16,
-		paddingTop: 12,
 	},
 });
 

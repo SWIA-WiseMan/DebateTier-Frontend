@@ -56,30 +56,28 @@ const IssueItem: React.FC<IssueItemProps> = ({
 			onPress={() => navigateToCommunityScreen(issueData)}
 			style={{ marginBottom: 16 }}
 		>
-			<View>
-				<View style={styles.container}>
-					<View style={styles.leftContentsContainer}>
-						<Text style={styles.title}>{issueData.title}</Text>
-						<Text style={styles.textContent} numberOfLines={3}>
-							{issueData.content}
+			<View style={styles.container}>
+				<View style={styles.leftContentsContainer}>
+					<Text style={styles.title}>{issueData.title}</Text>
+					<Text style={styles.textContent} numberOfLines={3}>
+						{issueData.content}
+					</Text>
+				</View>
+				<View style={styles.rightContentsContainer}>
+					<Image
+						source={require("@assets/images/Issue/Img_Tmp.png")}
+						style={styles.ImgStyle}
+					/>
+					<View style={styles.likeCommentCount}>
+						<Icon_Good style={styles.iconImg} />
+						<Text style={[styles.textWithMargin, { color: "#ff5c00" }]}>
+							{issueData.likeCount}
 						</Text>
-					</View>
-					<View style={styles.rightContentsContainer}>
-						<Image
-							source={require("@assets/images/Issue/Img_Tmp.png")}
-							style={styles.ImgStyle}
-						/>
-						<View style={styles.likeCommentCount}>
-							<Icon_Good style={styles.iconImg} />
-							<Text style={[styles.textWithMargin, { color: "#ff5c00" }]}>
-								{issueData.likeCount}
-							</Text>
-							<Text style={styles.textLine}></Text>
-							<Icon_Comment style={styles.iconImg} />
-							<Text style={[styles.textWithMargin, { color: "#0085ff" }]}>
-								{issueData.commentCount}
-							</Text>
-						</View>
+						<Text style={styles.textLine}></Text>
+						<Icon_Comment style={styles.iconImg} />
+						<Text style={[styles.textWithMargin, { color: "#0085ff" }]}>
+							{issueData.commentCount}
+						</Text>
 					</View>
 				</View>
 			</View>
@@ -89,6 +87,7 @@ const IssueItem: React.FC<IssueItemProps> = ({
 
 const styles = StyleSheet.create({
 	container: {
+		width: "100%",
 		flex: 1,
 		flexDirection: "row",
 		paddingTop: 12,
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
 	rightContentsContainer: {
 		paddingLeft: 14,
 		alignItems: "center",
-
 		justifyContent: "center",
 	},
 	ImgStyle: {
@@ -128,7 +126,6 @@ const styles = StyleSheet.create({
 		width: 15,
 		paddingHorizontal: 10,
 	},
-
 	textWithMargin: {
 		fontSize: 10,
 		fontFamily: "Roboto",
