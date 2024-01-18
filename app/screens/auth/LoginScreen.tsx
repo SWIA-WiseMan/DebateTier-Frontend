@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ToronTierIcon from "@assets/images/login/Icon_Torontier.svg";
-import KakaoLoginIcon from "@assets/images/login/Icon_KakaoLogin.svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import LoginChoice from "@components/login/loginChoice";
+import SignUp from "@components/login/signUp";
+import SignIn from "@components/login/signIn";
 
 const LoginScreen: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
-	const handleLoginButtonPress = async () => {
+	const [isSignUp, setIsSignUp] = useState(false);
+	const [isSignIn, setIsSignIn] = useState(false);
+	const changeSignInPage = async () => {
 		try {
-			console.log("Touched");
-			//await AsyncStorage.setItem("isLoggedIn", "true");
-			onLogin(); // isLoggedIn 값 변경 후 onLogin 함수를 호출하여 로그인 상태를 업데이트합니다.
+			setIsSignIn(true);
+			setIsSignUp(false);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	const changeSignUpPage = async () => {
+		try {
+			setIsSignIn(false);
+			setIsSignUp(true);
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	const resetPage = async () => {
+		try {
+			setIsSignIn(false);
+			setIsSignUp(false);
 		} catch (e) {
 			console.log(e);
 		}
@@ -17,17 +38,14 @@ const LoginScreen: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
 
 	return (
 		<View style={styles.container}>
-			<ToronTierIcon />
-			<View style={styles.textbox}>
-				<Text style={styles.line}>───── </Text>
-				<Text style={styles.text}>간편로그인으로 시작하기</Text>
-				<Text style={styles.line}> ─────</Text>
-			</View>
-			<GestureHandlerRootView>
-				<TouchableOpacity onPress={handleLoginButtonPress}>
-					<KakaoLoginIcon />
-				</TouchableOpacity>
-			</GestureHandlerRootView>
+			{!isSignIn && !isSignUp && (
+				<LoginChoice signIn={changeSignInPage} signUp={changeSignUpPage} />
+			)}
+			{isSignIn && !isSignUp && <SignIn reset={resetPage} onLogin={onLogin} />}
+			{!isSignIn && isSignUp && <SignUp reset={resetPage} />}
+			{isSignIn && isSignUp && (
+				<LoginChoice signIn={changeSignInPage} signUp={changeSignUpPage} />
+			)}
 		</View>
 	);
 };
@@ -37,7 +55,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "flex-start",
 		alignItems: "center",
-		paddingTop: "50%",
 	},
 	textbox: {
 		flexDirection: "row",
@@ -46,6 +63,20 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: "#919191",
+	},
+	button: {
+		width: 300,
+		height: 45,
+		backgroundColor: "#FFB800",
+		borderRadius: 10,
+		justifyContent: "center",
+		alignItems: "center",
+		marginBottom: 10,
+	},
+	buttonText: {
+		color: "#FFFFFF",
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 	line: {},
 });
