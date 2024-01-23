@@ -7,6 +7,7 @@ import "react-native-gesture-handler";
 import HomeScreen from "@screens/main/HomeScreen";
 import IssueScreen from "@screens/main/IssueScreen";
 import CommunityScreen from "@screens/issue/CommunityScreen";
+import SearchScreen from "@screens/main/SearchScreen";
 
 import HomeIcon from "@assets/images/navigation/Icon_Home.svg";
 import IssueIcon from "@assets/images/navigation/Icon_Issue.svg";
@@ -86,6 +87,13 @@ const NavigationManager: React.FC = () => {
 				<Stack.Screen
 					name="CommunityScreen"
 					component={CommunityScreen}
+					options={{
+						headerShown: false, // 헤더 숨기기
+					}}
+				/>
+				<Stack.Screen
+					name="SearchScreen"
+					component={SearchScreen}
 					options={{
 						headerShown: false, // 헤더 숨기기
 					}}

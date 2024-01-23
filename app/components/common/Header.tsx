@@ -7,9 +7,10 @@ import Icon_Search from "@assets/images/Icon_Search.svg";
 interface HeaderProps {
 	showShareButton: boolean;
 	onSharePress?: () => void;
+	onSearchPress?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ showShareButton, onSharePress }) => {
+const Header: React.FC<HeaderProps> = ({ showShareButton, onSharePress, onSearchPress }) => {
 	return (
 		<View style={styles.container}>
 			<Logo style={styles.logo} />
@@ -19,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ showShareButton, onSharePress }) => {
 						<Icon_Share />
 					</TouchableOpacity>
 				)}
-				<TouchableOpacity style={styles.button}>
+				<TouchableOpacity onPress={onSearchPress} style={styles.button}>
 					<Icon_Search />
 				</TouchableOpacity>
 			</View>
