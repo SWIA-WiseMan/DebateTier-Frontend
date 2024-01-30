@@ -8,7 +8,11 @@ const ScrapScreen: React.FC = () => {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<Header showShareButton={false} onSharePress={handleSharePress} />
+			<Header
+				showShareButton={false}
+				onSharePress={handleSharePress}
+				screen="찜목록"
+			/>
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 				<Text>Scrap Screen</Text>
 			</View>

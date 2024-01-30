@@ -9,7 +9,11 @@ const IssueScreen: React.FC = () => {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<Header showShareButton={false} onSharePress={handleSharePress} />
+			<Header
+				showShareButton={false}
+				onSharePress={handleSharePress}
+				screen="이슈소통방"
+			/>
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 				<IssueList />
 			</View>

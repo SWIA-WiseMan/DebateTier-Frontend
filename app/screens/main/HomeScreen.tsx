@@ -9,7 +9,6 @@ const HomeScreen: React.FC = () => {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<Header showShareButton={false} onSharePress={handleSharePress} />
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 				{/* <Text>Home Screen</Text> */}
 				<HomeList />
