@@ -10,10 +10,14 @@ const DebateScreen: React.FC = () => {
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
-			<Header showShareButton={false} onSharePress={handleSharePress} />
+			<Header
+				showShareButton={false}
+				onSharePress={handleSharePress}
+				screen="실시간토론방"
+			/>
 			<View style={{ flex: 1 }}>
 				{/* <DebateList layout="vertical" /> */}
-				<ChatRoom/>
+				<ChatRoom />
 			</View>
 		</SafeAreaView>
 	);

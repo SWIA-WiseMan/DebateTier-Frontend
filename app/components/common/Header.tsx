@@ -1,26 +1,38 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import Logo from "@assets/images/Logo_Toron-Tier.svg";
 import Icon_Share from "@assets/images/Icon_Share.svg";
 import Icon_Search from "@assets/images/Icon_Search.svg";
+import Icon_Alert from "@assets/images/Icon_Alert.svg";
 
 interface HeaderProps {
 	showShareButton: boolean;
 	onSharePress?: () => void;
+	screen: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ showShareButton, onSharePress }) => {
+const Header: React.FC<HeaderProps> = ({
+	showShareButton,
+	onSharePress,
+	screen = "Lorem",
+}) => {
 	return (
 		<View style={styles.container}>
-			<Logo style={styles.logo} />
+			{/* <Logo style={styles.logo} /> */}
 			<View style={styles.buttonsContainer}>
-				{showShareButton && (
+				<View style={styles.textContainer}>
+					<Text style={styles.highLightText}>{screen}</Text>
+				</View>
+				{/* {showShareButton && (
 					<TouchableOpacity onPress={onSharePress} style={styles.button}>
-						<Icon_Share />
+						<Icon_Search style={{ marginRight: 12 }} />
 					</TouchableOpacity>
-				)}
+				)} */}
 				<TouchableOpacity style={styles.button}>
 					<Icon_Search />
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.button}>
+					<Icon_Alert />
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -33,7 +45,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		paddingHorizontal: 16,
-		height: 56,
+		height: 70,
 		backgroundColor: "#FFFFFF",
 		borderBottomWidth: 1,
 		borderBottomColor: "#E0E0E0",
@@ -48,8 +60,22 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	button: {
-		marginRight: 8,
-		marginLeft: 15,
+		marginTop: 3,
+		marginLeft: 12,
+	},
+
+	highLightText: {
+		textAlign: "left",
+		fontFamily: "NotoSansKR-Bold",
+		fontSize: 18,
+		fontWeight: "700",
+		lineHeight: 20,
+		letterSpacing: -1,
+	},
+	textContainer: {
+		marginTop: 3,
+		marginLeft: 8,
+		flex: 1,
 	},
 });
 
